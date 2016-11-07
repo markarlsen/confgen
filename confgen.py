@@ -22,14 +22,17 @@ def file_input(config_template, params_file, config_new):
                 config.write(template.render(config_params) + '\n')
             else:
                 config.write(line + '\n')
-        print('Wrote configuration file at %s.' % (os.getcwd()))
+        print('Wrote "%s" at %s' % (config_new, os.getcwd()))
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(
         description='Creates a configuration based on a file with parameters.')
-    parser.add_argument('config_template', type=open, help='Configuration Template')
-    parser.add_argument('params_file', type=open, help='Parameter file location')
-    parser.add_argument('config_new', type=str, help='Name of output file')
+    parser.add_argument('config_template', type=open,
+                        help='Location of configuration template')
+    parser.add_argument('params_file', type=open,
+                        help='Location of the file containting the parameters')
+    parser.add_argument('config_new', type=str,
+                        help='Name of output file')
     args = parser.parse_args()
-    file_input(args.config_file, args.params_file, args.config_new)
+    file_input(args.config_template, args.params_file, args.config_new)
     
