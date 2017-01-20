@@ -13,7 +13,7 @@ def file_input(config_template, params_file, config_new):
     and replaces the parameters in the template.
     """
     file = [line for line in config_template]
-    config_params = dict([line.split() for line in params_file])
+    config_params = dict([line.split(';') for line in params_file])
 
     with open(config_new, 'w') as config:
         for line in file:
