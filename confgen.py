@@ -26,13 +26,13 @@ def file_input(config_template, params_file, config_new):
 if __name__ == '__main__':
     try:
         parser = argparse.ArgumentParser(
-            description='Creates a configuration based on a file with parameters.')
+            description='Creates configuration based on template and csv-file')
         parser.add_argument('config_template', type=open,
-                            help='Location of configuration template')
+                            help='Configuration template file')
         parser.add_argument('params_file', type=open,
-                            help='Location of the file containting the parameters')
+                            help='CSV-file with key/value pairs')
         parser.add_argument('config_new', type=str,
-                            help='Name of output file')
+                            help='Name of output configuration file')
         args = parser.parse_args()
         file_input(args.config_template, args.params_file, args.config_new)
     except FileNotFoundError as err:

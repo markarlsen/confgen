@@ -1,7 +1,7 @@
-hostname;SuperGW
-ip_mgmt;1.3.3.7 255.255.255.0
-desc_mgmt;SuperGW_Management
-desc_client_gw;Client_Gateway
-ip_client;192.168.0.1
+hostname;SampleSW
+ip_mgmt;192.168.0.1 255.255.255.0
+desc_mgmt;This is a description
+desc_client_gw;This is the client gateway
+ip_client;192.168.1.1 255.255.255.252
 desc_wan_gw;ISP_Connection
-ip_wan;123.123.123.1
+ip_wan;123.123.123.1 255.255.255.252
