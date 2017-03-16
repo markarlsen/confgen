@@ -1,6 +1,6 @@
 """
 Feed it with a configuration template and a file with
-parameters, and it will give you a configuration file in return.
+key/value parameters and it will give you a configuration file in return.
 """
 import argparse
 import os
@@ -13,8 +13,7 @@ def file_input(config_template, params_file, config_new):
     and replaces the parameters in the template.
     """
     file = [line for line in config_template]
-    config_params = dict([line.split(';') for line in params_file])
-
+    config_params = dict([line.rstrip('\n').split(';') for line in params_file])
     with open(config_new, 'w') as config:
         for line in file:
             template = Template(line)
@@ -25,14 +24,16 @@ def file_input(config_template, params_file, config_new):
         print('Wrote "%s" at %s' % (config_new, os.getcwd()))
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(
-        description='Creates a configuration based on a file with parameters.')
-    parser.add_argument('config_template', type=open,
-                        help='Location of configuration template')
-    parser.add_argument('params_file', type=open,
-                        help='Location of the file containting the parameters')
-    parser.add_argument('config_new', type=str,
-                        help='Name of output file')
-    args = parser.parse_args()
-    file_input(args.config_template, args.params_file, args.config_new)
-    
+    try:
+        parser = argparse.ArgumentParser(
+            description='Creates a configuration based on a file with parameters.')
+        parser.add_argument('config_template', type=open,
+                            help='Location of configuration template')
+        parser.add_argument('params_file', type=open,
+                            help='Location of the file containting the parameters')
+        parser.add_argument('config_new', type=str,
+                            help='Name of output file')
+        args = parser.parse_args()
+        file_input(args.config_template, args.params_file, args.config_new)
+    except FileNotFoundError as err:
+        print('File not found: \n' + str(err))
